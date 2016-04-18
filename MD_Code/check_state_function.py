@@ -1,4 +1,7 @@
 def check_state_function(coordinates):
+    """
+    Determine which state the molecule is in using torsional angles?
+    """
     if -100.0 < coordinates[0] < 0.0 and -120.0 < coordinates[1] < 30.0 and -100.0 < coordinates[2] < 0.0 and \
        -120.0 < coordinates[3] < 30.0 and -100.0 < coordinates[4] < 0.0 and -120.0 < coordinates[5] < 30.0:
         return 0

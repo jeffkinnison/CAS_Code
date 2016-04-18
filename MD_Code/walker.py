@@ -1,7 +1,29 @@
+"""
+Walker class for ensemble MD simulation trajectories
+"""
+
+
 class Walker:
     def __init__(self, previous_coordinates, current_coordinates, global_index, radius, previous_ball_center,
                  current_ball_center, ball_key, previous_distance_from_center, current_distance_from_center,
                  initial_step_num=0, weight=0.0, state=-1):
+        """
+        Create a new Walker.
+
+        Parameters:
+            previous_coordinates - atom coordinates from previous state
+            current_coordinates - atom coordinates for current state (updated after run?)
+            global_index - unique identifier for the Walker to follow it over iterations
+            radius - radius of the ball containing the Walker
+            previous_ball_center - center of the metastable state previously containing the Walker
+            current_ball_center - center of the metastable state currently containing the Walker
+            ball_key - index of the current ball?
+            previous_distance_from_center - distance from the center of the previous metastable state
+            current_distance_from_center - distance from the center of the current metastable state
+            initial_step_num - track which timestep the Walker is on
+            weight - the weight of this Walker for the resampling step
+            state - ?
+        """
         self.previous_coordinates = previous_coordinates
         self.current_coordinates = current_coordinates
         self.global_index = int(global_index)  # global_index indicates the corresponding trajectory file number
@@ -15,12 +37,22 @@ class Walker:
         self.weight = float(weight)
         self.state = int(state)
 
+
     def set(self, current_coordinates, weight=0.0):
+        """
+        Set the current atomic coordinates and weight after the Walker runs.
+        """
         self.current_coordinates = current_coordinates
         if weight > 0.0:
             self.weight = float(weight)
 
+
     def copy_walker(self, some_walker):
+        """
+        Copy all of the data from another Walker to this one.
+
+        This could cause a memory leak in the long run by keeping data alive for too long (references, not deep copies)
+        """
         self.previous_coordinates = some_walker.previous_coordinates
         self.current_coordinates = some_walker.current_coordinates
         self.radius = some_walker.radius

@@ -1,3 +1,7 @@
+"""
+This should probably be a CSV, maybe a JSON file.
+"""
+
 main_directory='/scratch/users/sahn1/Triazine'
 initial_configuration_directory='/scratch/users/sahn1/Triazine/InitConfig'
 
